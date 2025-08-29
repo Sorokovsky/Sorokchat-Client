@@ -6,7 +6,7 @@ const instance: Axios = new Axios({
 });
 
 instance.interceptors.request.use((request) => {
-    const accessToken: string = localStorage.getItem(ACCESS_TOKEN_KEY) ?? "";
+    const accessToken: string = localStorage.getItem(ACCESS_TOKEN_KEY) || "";
     request.headers.set(AUTHORIZATION_HEADER, `${BEARER_PREFIX} ${accessToken}`, true);
     return request;
 });
