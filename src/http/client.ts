@@ -1,5 +1,5 @@
 import {Axios} from "axios";
-import {ACCESS_TOKEN_KEY, API, AUTHORIZATION_HEADER} from "@/constants/api.constants";
+import {ACCESS_TOKEN_KEY, API, AUTHORIZATION_HEADER, BEARER_PREFIX} from "@/constants/api.constants";
 
 const instance: Axios = new Axios({
     baseURL: API
@@ -7,7 +7,7 @@ const instance: Axios = new Axios({
 
 instance.interceptors.request.use((request) => {
     const accessToken: string = localStorage.getItem(ACCESS_TOKEN_KEY) ?? "";
-    request.headers.set(AUTHORIZATION_HEADER, `Bearer ${accessToken}`, true);
+    request.headers.set(AUTHORIZATION_HEADER, `${BEARER_PREFIX} ${accessToken}`, true);
     return request;
 });
 
