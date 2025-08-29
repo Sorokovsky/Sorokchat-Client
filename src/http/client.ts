@@ -1,23 +1,14 @@
 import {Axios} from "axios";
-import {ACCESS_TOKEN_KEY, API, AUTHORIZATION_HEADER, BEARER_PREFIX} from "@/constants/api.constants";
+import {API} from "@/constants/api.constants";
+import {requestHandler} from "@/http/handlers/request.handler";
+import {responseHandler} from "@/http/handlers/response.handler";
 
 const instance: Axios = new Axios({
     baseURL: API
 });
 
-instance.interceptors.request.use((request) => {
-    const accessToken: string = localStorage.getItem(ACCESS_TOKEN_KEY) || "";
-    request.headers.set(AUTHORIZATION_HEADER, `${BEARER_PREFIX} ${accessToken}`, true);
-    return request;
-});
+instance.interceptors.request.use(requestHandler);
 
-instance.interceptors.response.use(response => {
-    const authorization: string = response.headers[AUTHORIZATION_HEADER]?.toString() || "";
-    const parts: string[] = authorization.split(" ");
-    let token: string = "";
-    if(parts.length === 2) token = parts[1];
-    localStorage.setItem(ACCESS_TOKEN_KEY, token);
-    return response;
-});
+instance.interceptors.response.use(responseHandler);
 
 export const httpClient: Axios = instance;

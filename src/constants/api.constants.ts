@@ -1,4 +1,10 @@
 export const API: string = "/api";
+export const SERVER_URL = "http://localhost:8080";
 export const ACCESS_TOKEN_KEY: string = "access-token";
 export const AUTHORIZATION_HEADER: string = "Authorization";
 export const BEARER_PREFIX: string = "Bearer";
+export const GET_PROFILE_URL: string = "/authentication/get-me";
+export const REGISTER_URL: string = "/authentication/register";
+export const LOGIN_URL: string = "/authentication/login";
+export const LOGOUT_URL: string = "/authentication/logout";
+export const RETRY_COUNT: number = 2;
